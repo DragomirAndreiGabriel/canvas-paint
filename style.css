@@ -1,0 +1,245 @@
+/* link for Google Fonts - we are using Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* start of LAYOUT RESET */
+html {
+  box-sizing: border-box;
+}
+
+/* same as html selector, to define variables and to separate it from the rest */
+:root {
+  --bg-color: #00a8e8;
+  --text-color: #1f1f1f;
+  --light-color: #fffffe;
+  --gray-color: #5a6168;
+  --gray-hvr-color: #a1aab3;
+  --active-color: #00a4d6;
+  --first-color: #1b1c1e;
+  --second-color: #d00000;
+  --third-color: #ffba08;
+  --fourth-color: #3f88c5;
+  --fifth-color: #136f63;
+  --six-color: #ff006e;
+  --seven-color: #8338ec;
+  --eight-color: #fb5607;
+  --nine-color: #8ac926;
+  --ten-color: #bc6c25;
+}
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+/* this applies to the whole page */
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* end of LAYOUT RESET */
+
+/* our app is inside this container - we use it to secify the width and to display flex - it's easier to style the sections this way */
+.container {
+  display: flex;
+  width: 1050px;
+  gap: 16px; /* the space between tools-menu and drawing-board */
+  padding: 10px;
+}
+
+/* for tools-menu and drawing-board */
+section {
+  background-color: var(--light-color);
+  border-radius: 7px;
+}
+
+/* setting width for tools-menu */
+.tools-menu {
+  width: 210px;
+  padding: 15px 22px;
+}
+
+/* adding margin-bottom to every row inside tools-menu (Shapes, Options, Colors and Buttons) */
+.tools-menu .row {
+  margin-bottom: 20px;
+}
+
+/* each ul has class options, we have ul for all divs with class row, besides the Buttons one */
+.row .options {
+  list-style: none; /* to get rid of the list bullets (by default they are displayed like this) */
+  margin: 10px 0 0 5px; /* adding margin top and left */
+}
+
+/* style for every option (<li>) */
+.row .options .option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* style for the image inside the active or hovered option) */
+.option:is(:hover, .active) img {
+  /* we can't use property color to modify images, we have to use filter to recolor a image */
+  filter: invert(50%) sepia(52%) saturate(4736%) hue-rotate(164deg) brightness(99%) contrast(101%);
+}
+
+/* style for the span and label tags that are inside an option */
+.option :where(span, label) {
+  color: var(--gray-color);
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+/* style for the spans and labels inside and active or hovered option */
+.option:is(:hover, .active) :where(span, label) {
+  color: var(--active-color);
+}
+
+/* select every label before #fill-color:checked and add active-color to it */
+#fill-color:checked ~ label {
+  color: var(--active-color);
+}
+
+/* style for checkbox */
+.option #fill-color {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  margin: auto 2px;
+}
+
+/* style for brush/eraser size slider */
+.option #slider {
+  width: 100%;
+  height: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* style for colors ul - to space the colors */
+.colors .options {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 7%;
+}
+
+/* individual style for color <li> - setting the size and making them circles */
+.colors .option {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-top: 3px;
+  position: relative; /* for positioning the border relative */
+}
+
+/* the following part is used to add each color to the colors panel */
+.colors .option:nth-child(1) {
+  background-color: var(--first-color);
+}
+
+.colors .option:nth-child(2) {
+  background-color: var(--second-color);
+}
+
+.colors .option:nth-child(3) {
+  background-color: var(--third-color);
+}
+
+.colors .option:nth-child(4) {
+  background-color: var(--fourth-color);
+}
+
+.colors .option:nth-child(5) {
+  background-color: var(--fifth-color);
+}
+
+.colors .option:nth-child(6) {
+  background-color: var(--six-color);
+}
+.colors .option:nth-child(7) {
+  background-color: var(--seven-color);
+}
+.colors .option:nth-child(8) {
+  background-color: var(--eight-color);
+}
+.colors .option:nth-child(9) {
+  background-color: var(--nine-color);
+}
+.colors .option:nth-child(10) {
+  background-color: var(--ten-color);
+}
+
+/* style for color-picker */
+.option #color-picker {
+  opacity: 0; /* to make the squared border invisible */
+  cursor: pointer;
+}
+
+/* addind border to the selected color */
+/* it will be a smaller circle, displayed inside the color, in the center */
+.colors .option.selected::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--light-color);
+  border-radius: inherit;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* common style for clear and save buttons */
+.buttons button {
+  all: unset; /* for reseting the default style for a button */
+  cursor: pointer;
+  width: 100%;
+  color: var(--light-color);
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 4px;
+  margin-bottom: 13px;
+  padding: 11px 0;
+}
+
+/* style for clear button */
+.buttons .clear {
+  color: var(--gray-color);
+  border: 1px solid var(--gray-color);
+  transition: all 0.3s ease;
+}
+
+/* this happens when clear button is hovered */
+.clear:hover {
+  background: var(--gray-hvr-color);
+  border: 1px solid var(--gray-hvr-color);
+  color: var(--light-color)
+}
+
+/* style for save button */
+.buttons .save {
+  background: var(--active-color);
+  border: 1px solid var(--active-color);
+}
+
+/* style for drawing-board section */
+.drawing-board {
+  flex: 1; /* to expand and to use all remainining space inside .container */
+  overflow: hidden; /* specifies that the content that doesn't fit in this section will not be displayed */
+}
+
+/* style for the canvas -> here we set width and height (making it the same size as the drawing-board section) */
+.drawing-board canvas {
+  width: 100%;
+  height: 100%;
+}
